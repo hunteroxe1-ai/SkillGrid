@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillGrid - Access Premium Skills</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* MAIN CONTAINER */
+        .main-container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background: rgba(22, 27, 34, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.1);
+        }
+
+        /* LEFT SIDE: DYNAMIC SCROLLER ANIMATION */
+        .scroller-side {
+            flex: 1;
+            position: relative;
+            background: #070a0f;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid rgba(0, 242, 254, 0.1);
+        }
+
+        .scroll-window {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            animation: slideCycle 15s infinite ease-in-out;
+        }
+
+        /* Slide Delays to create cascading movement */
+        .slide-card:nth-child(1) { animation-delay: 0s; }
+        .slide-card:nth-child(2) { animation-delay: 5s; }
+        .slide-card:nth-child(3) { animation-delay: 10s; }
+
+        /* Slide Graphic Placeholders using high-tech CSS shapes */
+        .slide-graphic {
+            width: 80%;
+            height: 220px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .graphic-hacking {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            border: 2px solid #00f2fe;
+        }
+        .graphic-school {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border: 2px solid #43e97b;
+        }
+        .graphic-social {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            border: 2px solid #f6d365;
+        }
+
+        .slide-card h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .slide-card p {
+            color: #8b949e;
+            font-size: 1.1rem;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+
+        /* RIGHT SIDE: PAPER UNFOLD LOGIN AREA */
+        .login-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: #0d1117;
+        }
+
+        /* THE PAPER UNFOLD ANIMATION ENGINE */
+        .paper-wrapper {
+            width: 80%;
+            max-width: 400px;
+            perspective: 1200px;
+        }
+
+        .unfolding-paper {
+            width: 100%;
+            background: #161b22;
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-origin: top center;
+            transform: rotateX(-90deg) scale(0.7);
+            opacity: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            animation: unfoldEffect 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* LOGO COLOR CHANGING EFFECT */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-text {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #00f2fe, #43e97b, #00f2fe);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: logoGradient 4s linear infinite;
+        }
+
+        .logo-tagline {
+            font-size: 0.85rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        /* FORM FIELD STYLES */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00f2fe;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+
+        /* BUTTON STYLES */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .form-footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        .form-footer a {
+            color: #43e97b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- ALL ANIMATION TIMELINES (CRITICAL LOGIC) --- */
+        
+        /* Logo color cycling */
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Paper Rolling and Unfolding effect */
+        @keyframes unfoldEffect {
+            0% {
+                transform: rotateX(-100deg) translateY(-100px) scale(0.5);
+                opacity: 0;
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotateX(0deg) translateY(0) scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        /* Left Side Scroller Loop (Drop down -> slide right -> drop out) */
+        @keyframes slideCycle {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(0) scale(0.9);
+            }
+            4% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            28% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            32% {
+                opacity: 0;
+                transform: translateY(100px) translateX(100px) scale(0.9);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100px) translateX(100px) scale(0.9);
+            }
+        }
+
+        /* RESPONSIVE DESIGN FOR MOBILE PHONES */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                height: auto;
+                width: 95%;
+                margin: 20px 0;
+            }
+            .scroller-side {
+                height: 350px;
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 242, 254, 0.1);
+            }
+            .login-side {
+                padding: 40px 0;
+            }
+            .slide-graphic {
+                height: 140px;
+                margin-bottom: 15px;
+            }
+            .slide-card h3 { font-size: 1.5rem; }
+            .slide-card p { font-size: 0.95rem; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <div class="scroller-side">
+            <div class="scroll-window">
+                
+                <div class="slide-card">
+                    <div class="slide-graphic graphic-hacking">
+                        🛡️ [ LIVE WIRELESS SCANNER ]
+                    </div>
+                    <h3>Ethical Hacking Lab</h3>
+                    <p>Learn how to audit Wi-Fi networks, secure social accounts (Facebook & WhatsApp), and deploy elite cyber defenses safely.</p>
+                </div>
+
+                <div class="slide-card">
+                    <div class="slide-graphic graphic-school">
+                        📚 [ DOWNLOAD CENTER ]
+                    </div>
+                    <h3>Malawian Education Hub</h3>
+                    <p>Instant access to up-to-date MSCE & JC notes, structural past papers, and premium downloadable academic textbooks.</p>
+                </div>
+
+                <div class="slide-card">
+                    <div class="slide-graphic graphic-social">
+                        🛠️ [ HARDWARE/SOFTWARE PRO ]
+                    </div>
+                    <h3>Phone & PC Repair</h3>
+                    <p>Master system flashing, hardware diagnosis, custom ROM installations, and advanced device modification tricks.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="login-side">
+            <div class="paper-wrapper">
+                <div class="unfolding-paper">
+                    
+                    <div class="logo-container">
+                        <div class="logo-text">SkillGrid</div>
+                        <div class="logo-tagline">Knowledge Base Hub</div>
+                    </div>
+
+                    <form onsubmit="event.preventDefault();">
+                        <div class="form-group">
+                            <label for="username">Username or Email</label>
+                            <input type="text" id="username" placeholder="Enter your credentials" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" class="btn-login">Unlock Premium Access</button>
+                    </form>
+
+                    <div class="form-footer">
+                        Don't have an account? <a href="#">Create Account (K1,999/Mo)</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
