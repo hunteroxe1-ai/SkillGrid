@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillGrid - Access Premium Skills</title>
+    <title>SkillGrid - Unlock Premium Knowledge</title>
     <style>
-        /* CSS RESET & VARIABLES */
+        /* CSS RESET & GENERAL STYLES */
         * {
             margin: 0;
             padding: 0;
@@ -23,8 +23,8 @@
             align-items: center;
         }
 
-        /* MAIN CONTAINER */
-        .main-container {
+        /* MAIN WEBSITE CONTAINER */
+        .main-wrapper {
             display: flex;
             width: 90%;
             max-width: 1200px;
@@ -33,10 +33,12 @@
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(0, 242, 254, 0.2);
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.1);
+            box-shadow: 0 0 40px rgba(0, 242, 254, 0.15);
         }
 
-        /* LEFT SIDE: DYNAMIC SCROLLER ANIMATION */
+        /* ========================================================
+           LEFT SIDE: DYNAMIC SCROLLER (ANIMATED SLIDESHOW)
+           ======================================================== */
         .scroller-side {
             flex: 1;
             position: relative;
@@ -66,58 +68,65 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transform: translateY(50px) scale(0.9);
-            animation: slideCycle 15s infinite ease-in-out;
+            transform: translateY(-100px) scale(0.9);
+            animation: advancedSlideLoop 15s infinite ease-in-out;
         }
 
-        /* Slide Delays to create cascading movement */
+        /* Dynamic Time Delays for Endless Loop */
         .slide-card:nth-child(1) { animation-delay: 0s; }
         .slide-card:nth-child(2) { animation-delay: 5s; }
         .slide-card:nth-child(3) { animation-delay: 10s; }
 
-        /* Slide Graphic Placeholders using high-tech CSS shapes */
+        /* Tech Vector Graphic Art Placeholders */
         .slide-graphic {
-            width: 80%;
-            height: 220px;
-            margin-bottom: 30px;
+            width: 85%;
+            height: 240px;
+            margin-bottom: 25px;
             border-radius: 12px;
-            position: relative;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            position: relative;
         }
 
         .graphic-hacking {
             background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
             border: 2px solid #00f2fe;
         }
+        
         .graphic-school {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             border: 2px solid #43e97b;
         }
-        .graphic-social {
+
+        .graphic-tech {
             background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
             border: 2px solid #f6d365;
         }
 
         .slide-card h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 15px;
-            color: #fff;
+            color: #ffffff;
+            font-weight: 700;
         }
 
         .slide-card p {
             color: #8b949e;
             font-size: 1.1rem;
-            max-width: 80%;
+            max-width: 85%;
             line-height: 1.6;
         }
 
-        /* RIGHT SIDE: PAPER UNFOLD LOGIN AREA */
+        /* ========================================================
+           RIGHT SIDE: 3D PAPER UNFOLD LOGIN INTERFACE
+           ======================================================== */
         .login-side {
             flex: 1;
             display: flex;
@@ -127,252 +136,232 @@
             background: #0d1117;
         }
 
-        /* THE PAPER UNFOLD ANIMATION ENGINE */
-        .paper-wrapper {
+        .paper-3d-wrapper {
             width: 80%;
-            max-width: 400px;
-            perspective: 1200px;
+            max-width: 420px;
+            perspective: 1500px;
         }
 
-        .unfolding-paper {
+        /* The Unfolding Sheet Engine */
+        .unfolding-sheet {
             width: 100%;
             background: #161b22;
-            border-radius: 12px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
             transform-origin: top center;
-            transform: rotateX(-90deg) scale(0.7);
+            transform: rotateX(-90deg) scale(0.6);
             opacity: 0;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-            animation: unfoldEffect 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            animation-delay: 0.5s;
+            filter: blur(5px);
+            animation: paperUnfoldEffect 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            animation-delay: 0.3s;
         }
 
-        /* LOGO COLOR CHANGING EFFECT */
-        .logo-container {
+        /* SHIFTING COLOR LOGO ANIMATION */
+        .logo-box {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
-        .logo-text {
-            font-size: 2.8rem;
+        .logo-main {
+            font-size: 3rem;
             font-weight: 800;
-            letter-spacing: 2px;
-            background: linear-gradient(45deg, #00f2fe, #43e97b, #00f2fe);
-            background-size: 200% auto;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #00f2fe, #43e97b, #4facfe, #00f2fe);
+            background-size: 300% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: logoGradient 4s linear infinite;
+            animation: logoColorShift 5s linear infinite;
         }
 
-        .logo-tagline {
-            font-size: 0.85rem;
+        .logo-sub {
+            font-size: 0.8rem;
             color: #8b949e;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 5px;
+            letter-spacing: 4px;
+            margin-top: 6px;
         }
 
-        /* FORM FIELD STYLES */
-        .form-group {
-            margin-bottom: 20px;
+        /* INPUT FIELD ARCHITECTURE */
+        .input-group {
+            margin-bottom: 22px;
         }
 
-        .form-group label {
+        .input-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 9px;
             color: #8b949e;
             font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
 
-        .form-group input {
+        .input-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px 18px;
             background: #0d1117;
             border: 1px solid #30363d;
-            border-radius: 6px;
-            color: #fff;
+            border-radius: 8px;
+            color: #ffffff;
             font-size: 1rem;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .form-group input:focus {
+        .input-group input:focus {
             outline: none;
             border-color: #00f2fe;
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+            transform: translateY(-1px);
         }
 
-        /* BUTTON STYLES */
-        .btn-login {
+        /* ERROR MESSAGE AREA */
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        /* METALLIC GRADIENT UNLOCK BUTTON */
+        .btn-action {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background: linear-gradient(90deg, #00f2fe, #4facfe);
             border: none;
-            border-radius: 6px;
-            color: #fff;
+            border-radius: 8px;
+            color: #ffffff;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
             margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
         }
 
-        .btn-login:hover {
+        .btn-action:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.45);
         }
 
-        .form-footer {
-            margin-top: 25px;
+        .action-footer {
+            margin-top: 30px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #8b949e;
         }
 
-        .form-footer a {
+        .action-footer a {
             color: #43e97b;
             text-decoration: none;
             font-weight: 600;
         }
 
-        .form-footer a:hover {
+        .action-footer a:hover {
             text-decoration: underline;
         }
 
-        /* --- ALL ANIMATION TIMELINES (CRITICAL LOGIC) --- */
-        
-        /* Logo color cycling */
-        @keyframes logoGradient {
+        /* WATERMARK LOGO TEXT BASED ON SETTINGS */
+        .watermark {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 1px;
+            z-index: 9999;
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        /* ANIMATION ENGINES */
+        @keyframes logoColorShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Paper Rolling and Unfolding effect */
-        @keyframes unfoldEffect {
+        @keyframes paperUnfoldEffect {
             0% {
-                transform: rotateX(-100deg) translateY(-100px) scale(0.5);
+                transform: rotateX(-100deg) translateY(-150px) scale(0.4);
                 opacity: 0;
                 filter: blur(10px);
             }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: rotateX(0deg) translateY(0) scale(1);
-                opacity: 1;
-                filter: blur(0);
-            }
+            70% { transform: rotateX(15deg) translateY(5px) scale(1.02); filter: blur(0); }
+            100% { transform: rotateX(0deg) translateY(0) scale(1); opacity: 1; filter: blur(0); }
         }
 
-        /* Left Side Scroller Loop (Drop down -> slide right -> drop out) */
-        @keyframes slideCycle {
-            0% {
-                opacity: 0;
-                transform: translateY(-100px) translateX(0) scale(0.9);
-            }
-            4% {
-                opacity: 1;
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            28% {
-                opacity: 1;
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            32% {
-                opacity: 0;
-                transform: translateY(100px) translateX(100px) scale(0.9);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(100px) translateX(100px) scale(0.9);
-            }
+        @keyframes advancedSlideLoop {
+            0% { opacity: 0; transform: translateY(-120px) scale(0.9); }
+            4% { opacity: 1; transform: translateY(0) scale(1); }
+            28% { opacity: 1; transform: translateY(0) scale(1); }
+            32% { opacity: 0; transform: translateY(80px) scale(0.92); }
+            100% { opacity: 0; transform: translateY(80px) scale(0.92); }
         }
 
-        /* RESPONSIVE DESIGN FOR MOBILE PHONES */
         @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column;
-                height: auto;
-                width: 95%;
-                margin: 20px 0;
-            }
-            .scroller-side {
-                height: 350px;
-                border-right: none;
-                border-bottom: 1px solid rgba(0, 242, 254, 0.1);
-            }
-            .login-side {
-                padding: 40px 0;
-            }
-            .slide-graphic {
-                height: 140px;
-                margin-bottom: 15px;
-            }
-            .slide-card h3 { font-size: 1.5rem; }
-            .slide-card p { font-size: 0.95rem; max-width: 100%; }
+            .main-wrapper { flex-direction: column; height: auto; width: 95%; margin: 20px 0; }
+            .scroller-side { height: 380px; border-right: none; border-bottom: 1px solid rgba(0, 242, 254, 0.1); }
+            .login-side { padding: 45px 0; }
+            .slide-graphic { height: 150px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
+    <div class="main-wrapper">
         
         <div class="scroller-side">
             <div class="scroll-window">
                 
                 <div class="slide-card">
-                    <div class="slide-graphic graphic-hacking">
-                        🛡️ [ LIVE WIRELESS SCANNER ]
-                    </div>
+                    <div class="slide-graphic graphic-hacking">🔒 [ NETWORK AUDIT ACTIVE ]</div>
                     <h3>Ethical Hacking Lab</h3>
-                    <p>Learn how to audit Wi-Fi networks, secure social accounts (Facebook & WhatsApp), and deploy elite cyber defenses safely.</p>
+                    <p>Gain real-world skills in wireless terminal scanning, advanced configuration defense, and securing Facebook or WhatsApp frameworks safely.</p>
                 </div>
 
                 <div class="slide-card">
-                    <div class="slide-graphic graphic-school">
-                        📚 [ DOWNLOAD CENTER ]
-                    </div>
-                    <h3>Malawian Education Hub</h3>
-                    <p>Instant access to up-to-date MSCE & JC notes, structural past papers, and premium downloadable academic textbooks.</p>
+                    <div class="slide-graphic graphic-school">📝 [ MALAWIAN REPOSITORY ]</div>
+                    <h3>Education Database</h3>
+                    <p>Instant access to standard MSCE and JC past exam materials, structured syllabus notes, and directly downloadable academic resources.</p>
                 </div>
 
                 <div class="slide-card">
-                    <div class="slide-graphic graphic-social">
-                        🛠️ [ HARDWARE/SOFTWARE PRO ]
-                    </div>
-                    <h3>Phone & PC Repair</h3>
-                    <p>Master system flashing, hardware diagnosis, custom ROM installations, and advanced device modification tricks.</p>
+                    <div class="slide-graphic graphic-tech">🛠️ [ DEVICE DIAGNOSTICS ]</div>
+                    <h3>Phone & PC Engineering</h3>
+                    <p>Step-by-step masterclasses on mobile operating system flashing, firmware updates, bootloader unlocking, and hardware board repairs.</p>
                 </div>
 
             </div>
         </div>
 
         <div class="login-side">
-            <div class="paper-wrapper">
-                <div class="unfolding-paper">
+            <div class="paper-3d-wrapper">
+                <div class="unfolding-sheet">
                     
-                    <div class="logo-container">
-                        <div class="logo-text">SkillGrid</div>
-                        <div class="logo-tagline">Knowledge Base Hub</div>
+                    <div class="logo-box">
+                        <div class="logo-main">SkillGrid</div>
+                        <div class="logo-sub">Knowledge Access Portal</div>
                     </div>
 
-                    <form onsubmit="event.preventDefault();">
-                        <div class="form-group">
-                            <label for="username">Username or Email</label>
-                            <input type="text" id="username" placeholder="Enter your credentials" required>
+                    <div class="error-message" id="errBox">Invalid security credentials!</div>
+
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <label for="emailInput">Email Address</label>
+                            <input type="email" id="emailInput" placeholder="name@example.com" required>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" placeholder="••••••••" required>
+                        <div class="input-group">
+                            <label for="passInput">Secure Portal Password</label>
+                            <input type="password" id="passInput" placeholder="••••••••" required>
                         </div>
 
-                        <button type="submit" class="btn-login">Unlock Premium Access</button>
+                        <button type="submit" class="btn-action">Unlock Portal Access</button>
                     </form>
 
-                    <div class="form-footer">
-                        Don't have an account? <a href="#">Create Account (K1,999/Mo)</a>
+                    <div class="action-footer">
+                        New to the grid? <a href="#">Create Account (K1,999/Mo)</a>
                     </div>
 
                 </div>
@@ -380,6 +369,34 @@
         </div>
 
     </div>
+
+    <div class="watermark">by Phillimon</div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('emailInput').value.trim();
+            const password = document.getElementById('passInput').value;
+            const errBox = document.getElementById('errBox');
+
+            // Hardcoded Master Admin Guardrail Identification
+            const adminEmail = "hunteroxe1@gmail.com";
+            const adminPassword = "Phillimon100%+";
+
+            if (email === adminEmail && password === adminPassword) {
+                errBox.style.display = "none";
+                alert("Welcome back Master Hunter Oxe. Granting Super Admin Privilege...");
+                window.location.href = "admin.html"; // Redirects straight to your admin dashboard
+            } else {
+                // If it's not the admin, it allows regular users to step inside their portal
+                // In Step 4/Backend this connects to the MySQL verification endpoint
+                errBox.style.display = "none";
+                alert("Authentication Success! Loading regular user workspace...");
+                window.location.href = "dashboard.html"; // Regular subscription portal
+            }
+        });
+    </script>
 
 </body>
 </html>
